@@ -19,8 +19,8 @@ platform by platform.
 - What is Logos and why run a node
 - Platform comparison (macOS / Linux / Windows)
 - Method 1: Logos Basecamp (desktop GUI — easiest)
-- Method 2: Nwaku via Docker Compose (messaging node)
-- Method 3: Nwaku via prebuilt binary (no Docker)
+- Method 2: Logos Delivery via Docker Compose (messaging node)
+- Method 3: Logos Delivery via prebuilt binary (no Docker)
 - Method 4: Logos Blockchain Node (Linux only, advanced)
 - What Docker is (beginner explainer)
 - Troubleshooting tips

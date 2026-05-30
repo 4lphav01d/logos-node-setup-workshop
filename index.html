@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Running a Logos Node - Step by Step Guide</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" href="https://logos.co/favicon.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/dracula.css" id="theme" />
   <style>
@@ -42,6 +44,10 @@
       --r-main-font: 'Benne', Georgia, serif;
       --r-heading-font: 'Benne', Georgia, serif;
       --r-code-font: 'CamingoCode', 'Courier New', monospace;
+      --logos-dark: #152521;
+      --logos-cream: #F3EFE0;
+      --logos-orange: #FF6B2B;
+      --logos-gray: #9EA5A0;
     }
 
     .slides { text-align: left !important; }
@@ -50,26 +56,21 @@
     .reveal h1 { font-size: 2.4em; font-weight: 800; letter-spacing: -0.02em; }
     .reveal h2 { font-size: 1.5em; font-weight: 700; letter-spacing: -0.01em; }
     .reveal h3 { font-size: 1.1em; font-weight: 600; }
-    .reveal p, .reveal li { font-size: 0.55em; line-height: 1.4; }
-    .reveal pre { font-size: 0.38em; width: 100%; margin: 0.4em 0; }
-    .reveal pre code { max-height: 350px; padding: 0.7em; border-radius: 6px; font-family: 'CamingoCode', 'Courier New', monospace; }
-    .reveal code { font-size: 0.8em; font-family: 'CamingoCode', 'Courier New', monospace; }
+    .reveal p, .reveal li { font-size: 0.65em; line-height: 1.5; }
+    .reveal pre { font-size: 0.45em; width: 100%; margin: 0.4em 0; }
+    .reveal pre code { max-height: 400px; padding: 0.7em; border-radius: 6px; font-family: 'CamingoCode', 'Courier New', monospace; }
+    .reveal code { font-size: 0.85em; font-family: 'CamingoCode', 'Courier New', monospace; }
     .reveal ul { display: block; margin: 0.2em 0; }
     .reveal ol { display: block; margin: 0.2em 0; }
     .reveal li { margin: 0.15em 0; }
-    .reveal blockquote { font-size: 0.55em; padding: 0.4em 0.8em; border-left: 4px solid #bd93f9; background: rgba(189,147,249,0.1); }
+    .reveal blockquote { font-size: 0.6em; padding: 0.5em 0.8em; border-left: 4px solid var(--logos-orange); background: rgba(255,107,43,0.08); }
 
-    .platform-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.6em;
-      margin: 0.6em 0;
-    }
     .platform-card {
       padding: 0.6em;
       border-radius: 6px;
       text-align: center;
-      font-size: 0.5em;
+      font-size: 0.55em;
+      margin-bottom: 0.4em;
     }
     .platform-card.available { background: rgba(80,250,123,0.15); border: 1px solid #50fa7b; }
     .platform-card.experimental { background: rgba(255,184,108,0.15); border: 1px solid #ffb86c; }
@@ -79,54 +80,104 @@
     .method-card {
       background: rgba(68,68,68,0.4);
       border-radius: 6px;
-      padding: 0.5em;
+      padding: 0.6em;
       margin: 0.4em 0;
-      border-left: 4px solid #bd93f9;
+      border-left: 4px solid var(--logos-orange);
     }
-    .method-card .title { font-weight: 700; font-size: 0.7em; color: #bd93f9; }
-    .method-card .desc { font-size: 0.48em; margin-top: 0.2em; }
+    .method-card .title { font-weight: 700; font-size: 0.75em; color: var(--logos-orange); }
+    .method-card .desc { font-size: 0.58em; margin-top: 0.2em; }
 
     .step-list { counter-reset: step; }
-    .step-list li { counter-increment: step; margin: 0.3em 0; list-style: none; position: relative; padding-left: 1.8em; }
+    .step-list li { counter-increment: step; margin: 0.35em 0; list-style: none; position: relative; padding-left: 2em; }
     .step-list li::before {
       content: counter(step);
       position: absolute;
       left: 0;
-      top: 0.1em;
-      background: #bd93f9;
-      color: #282a36;
+      top: 0.05em;
+      background: var(--logos-orange);
+      color: #fff;
       font-weight: 700;
-      width: 1.3em;
-      height: 1.3em;
+      width: 1.4em;
+      height: 1.4em;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.6em;
+      font-size: 0.65em;
+      font-family: 'Benne', serif;
     }
 
     .fragment.highlight-current-green.visible.current-fragment { color: #50fa7b; }
     .fragment.highlight-current-blue.visible.current-fragment { color: #8be9fd; }
-    .fragment.highlight-current-orange.visible.current-fragment { color: #ffb86c; }
+    .fragment.highlight-current-orange.visible.current-fragment { color: var(--logos-orange); }
 
-    .tip { font-size: 0.45em; color: #f1fa8c; margin-top: 0.4em; }
-    .warn { font-size: 0.45em; color: #ffb86c; }
-    .note { font-size: 0.4em; color: #6272a4; }
+    .tip { font-size: 0.52em; color: #f1fa8c; margin-top: 0.4em; }
+    .warn { font-size: 0.52em; color: #ffb86c; }
+    .note { font-size: 0.48em; color: #6272a4; }
 
-    table { font-size: 0.48em; width: 100%; }
-    th { background: rgba(189,147,249,0.2); }
-    td, th { padding: 0.3em 0.5em; border: 1px solid rgba(255,255,255,0.1); }
+    table { font-size: 0.55em; width: 100%; }
+    th { background: rgba(255,107,43,0.2); }
+    td, th { padding: 0.35em 0.5em; border: 1px solid rgba(255,255,255,0.1); }
 
-    .logos-logo {
-      font-size: 2.5em;
+    /* ---- Title slide branding ---- */
+    .title-slide {
+      background: linear-gradient(135deg, #0f1e1a 0%, #152521 50%, #1a2d27 100%);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .title-slide .logos-wordmark {
+      font-size: 4em;
       font-weight: 800;
-      background: linear-gradient(135deg, #bd93f9, #50fa7b);
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--logos-cream) 0%, #d4cfb8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.03em;
       font-family: 'Benne', Georgia, serif;
+      line-height: 1;
     }
-    .subtitle { color: #6272a4; font-size: 0.45em !important; }
+    .title-slide .logos-mark {
+      width: 60px;
+      height: auto;
+      margin-bottom: 0.3em;
+    }
+    .title-slide .logos-mark svg {
+      width: 100%;
+      height: auto;
+    }
+    .title-slide h1 {
+      color: var(--logos-cream);
+      font-size: 2em;
+      margin-top: 0.1em;
+    }
+    .title-slide .tagline {
+      color: var(--logos-orange);
+      font-size: 0.7em;
+      margin-top: 0.3em;
+    }
+    .title-slide .badge-row {
+      margin-top: 1.5em;
+      display: flex;
+      gap: 0.6em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .title-slide .badge {
+      border: 1px solid var(--logos-gray);
+      color: var(--logos-gray);
+      padding: 0.3em 0.8em;
+      border-radius: 20px;
+      font-size: 0.45em;
+      font-family: 'CamingoCode', monospace;
+    }
+    .title-slide .nav-hint {
+      color: rgba(158,165,160,0.5);
+      font-size: 0.4em;
+      margin-top: 2em;
+    }
   </style>
 </head>
 <body>
@@ -135,16 +186,27 @@
 
       <!-- SLIDE 1: TITLE -->
       <section>
-        <div style="text-align: center; padding-top: 0.8em;">
-          <div class="logos-logo">LOGOS</div>
-          <h1 style="margin-top: 0.1em;">Running a Logos Node</h1>
-          <p style="font-size: 0.6em; color: #8be9fd;">A step-by-step guide for everyone</p>
-          <p class="subtitle" style="margin-top: 1.5em;">
-            Platform-aware &bull; Beginner-friendly &bull; No prior Docker knowledge needed
-          </p>
-          <p style="font-size: 0.4em; color: #6272a4; margin-top: 2.5em;">
-            Press <kbd>Space</kbd> or arrow keys to navigate &bull; <kbd>Esc</kbd> for overview
-          </p>
+        <div class="title-slide">
+          <div class="logos-mark">
+            <svg viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.6386 26C13.728 26 12.945 25.7854 12.2881 25.3549C11.6312 24.9244 11.1344 24.2467 10.7962 23.3233C10.5841 22.7003 10.4359 21.9368 10.3513 21.0328C10.2668 20.1302 10.2134 19.1833 10.1926 18.1948C10.1718 17.1842 10.1497 16.2061 10.1289 15.2592C10.1289 15.0017 10.0651 14.8716 9.93897 14.8716C9.83361 14.8716 9.72695 14.9575 9.62159 15.1292C9.21967 15.8822 8.74359 16.742 8.19208 17.7097C7.66268 18.6773 7.13328 19.645 6.60388 20.6127C6.07447 21.5804 5.5984 22.4518 5.17436 23.2257C4.77243 23.9788 4.48627 24.5264 4.31717 24.871C4.10515 25.3445 3.76696 25.6449 3.3013 25.7737C2.85644 25.9246 2.29582 25.9571 1.61814 25.8699C0.940452 25.7841 0.464381 25.5149 0.188624 25.0635C-0.107945 24.5901 -0.0546142 24.0958 0.347315 23.5795C0.623072 23.2348 1.01459 22.7198 1.52188 22.0317C2.03047 21.3216 2.6015 20.5269 3.23626 19.645C3.87102 18.7424 4.51749 17.8176 5.17306 16.8707C5.85075 15.9031 6.48551 14.9783 7.07865 14.0964C7.67178 13.1938 8.16867 12.4082 8.5706 11.7423C8.99464 11.0542 9.26909 10.5483 9.39657 10.2257C9.52404 9.92526 9.66062 9.591 9.8089 9.22551C9.95719 8.86003 10.0313 8.48414 10.0313 8.09655C10.0313 6.67754 9.89345 5.61231 9.61899 4.90345C9.36535 4.17249 9.01545 3.68864 8.5706 3.45193C8.14655 3.1944 7.68089 3.06433 7.1736 3.06433C6.79248 3.06433 6.38015 3.13977 5.9353 3.29065C5.51125 3.44152 5.2368 3.58069 5.10933 3.70945C4.87649 3.94617 4.65407 3.98909 4.44205 3.83822C4.23002 3.68734 4.16629 3.44022 4.25214 3.09685C4.48497 2.30085 4.90901 1.592 5.52296 0.967684C6.13951 0.322561 6.9967 0 8.09713 0C9.26129 0 10.1822 0.332967 10.8599 1.0002C11.5376 1.66743 12.0241 2.73137 12.3206 4.1933C12.6172 5.65523 12.7655 7.5906 12.7655 9.9994C12.7655 12.8374 12.8084 15.1071 12.893 16.8057C12.9775 18.5044 13.1154 19.7842 13.3053 20.6439C13.4952 21.4828 13.7606 22.0421 14.0987 22.3218C14.459 22.6014 14.9026 22.7406 15.432 22.7406C15.9614 22.7406 16.4167 22.6326 16.8615 22.418C17.3272 22.2034 17.7291 21.9238 18.0686 21.5791C18.2169 21.4074 18.386 21.3424 18.5772 21.3853C18.7671 21.4282 18.9154 21.5466 19.022 21.7404C19.1495 21.9121 19.1495 22.1384 19.022 22.418C18.5772 23.4078 17.9841 24.2571 17.2439 24.966C16.5246 25.654 15.6557 25.9987 14.6399 25.9987L14.6386 26Z" fill="url(#logos-gradient)"/>
+              <defs>
+                <linearGradient id="logos-gradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#F3EFE0" />
+                  <stop offset="100%" stop-color="#d4cfb8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="logos-wordmark">LOGOS</div>
+          <h1>Running a Node</h1>
+          <p class="tagline">A step-by-step guide for everyone</p>
+          <div class="badge-row">
+            <span class="badge">Platform-aware</span>
+            <span class="badge">Beginner-friendly</span>
+            <span class="badge">No Docker knowledge needed</span>
+          </div>
+          <p class="nav-hint">Press <kbd style="color:var(--logos-cream);">Space</kbd> or <kbd style="color:var(--logos-cream);">→</kbd> to begin</p>
         </div>
       </section>
 
@@ -155,20 +217,22 @@
           Logos is a grassroots movement building <strong>decentralized public infrastructure</strong>
           for communities that want sovereignty over their digital lives.
         </p>
-        <div class="platform-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 0.6em;">
-          <div class="platform-card" style="background: rgba(139,233,253,0.1); border-color: #8be9fd;">
-            <div class="emoji">🗣️</div>
-            <strong>Logos Delivery</strong><br/><span style="font-size:0.8em;">Messaging layer</span>
-          </div>
-          <div class="platform-card" style="background: rgba(80,250,123,0.1); border-color: #50fa7b;">
-            <div class="emoji">📦</div>
-            <strong>Codex</strong><br/><span style="font-size:0.8em;">Storage layer</span>
-          </div>
-          <div class="platform-card" style="background: rgba(255,184,108,0.1); border-color: #ffb86c;">
-            <div class="emoji">⛓️</div>
-            <strong>Nomos</strong><br/><span style="font-size:0.8em;">Consensus layer</span>
-          </div>
+
+        <div class="method-card" style="border-left-color: #8be9fd;">
+          <div class="title">🗣️ Logos Delivery</div>
+          <div class="desc">Messaging layer — private peer-to-peer communication that resists surveillance and censorship. Binary: <strong>wakunode2</strong>.</div>
         </div>
+
+        <div class="method-card" style="border-left-color: #50fa7b;">
+          <div class="title">📦 Codex</div>
+          <div class="desc">Storage layer — secure decentralized storage enabling fully decentralized apps and file sharing.</div>
+        </div>
+
+        <div class="method-card" style="border-left-color: #ffb86c;">
+          <div class="title">⛓️ Nomos</div>
+          <div class="desc">Consensus layer — advanced privacy for a new era of decentralized applications and social institutions.</div>
+        </div>
+
         <blockquote style="margin-top: 0.5em;">
           "Logos provides the tech stack for communities to run their own infrastructure — no permission needed."
         </blockquote>
@@ -190,7 +254,7 @@
         <div class="method-card" style="border-left-color: #8be9fd;">
           <div class="title">💬 Logos Delivery — Messaging Node</div>
           <div class="desc">
-            A lightweight node (binary <strong>wakunode2</strong>) for the Waku messaging layer. Runs relay, store, and filter protocols.
+            A lightweight node for the Waku messaging layer. Runs relay, store, and filter protocols.
             Available via <strong>Docker Compose</strong>, <strong>prebuilt binary</strong>, or <strong>source build</strong>.
             Works on Linux, macOS, and (experimentally) Windows.
           </div>
@@ -246,23 +310,22 @@
           </tbody>
         </table>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4em; margin-top: 0.6em;">
-          <div>
-            <h3 style="font-size: 0.6em;">Prerequisites common to all</h3>
-            <ul style="font-size: 0.45em;">
-              <li>Stable internet connection</li>
-              <li>2–4 GB RAM (varies by node type)</li>
-              <li>Terminal / command line comfort</li>
-            </ul>
-          </div>
-          <div>
-            <h3 style="font-size: 0.6em;">Special requirements</h3>
-            <ul style="font-size: 0.45em;">
-              <li><strong>Blockchain node:</strong> Linux, 64 GB+ storage</li>
-              <li><strong>Logos Delivery:</strong> Linea Sepolia RPC URL (free)</li>
-              <li><strong>Basecamp:</strong> Qt6 (bundled in binary)</li>
-            </ul>
-          </div>
+        <div style="margin-top: 0.6em;">
+          <h3 style="font-size: 0.65em;">Prerequisites common to all</h3>
+          <ul style="font-size: 0.52em;">
+            <li>Stable internet connection</li>
+            <li>2–4 GB RAM (varies by node type)</li>
+            <li>Terminal / command line comfort</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 0.3em;">
+          <h3 style="font-size: 0.65em;">Special requirements</h3>
+          <ul style="font-size: 0.52em;">
+            <li><strong>Blockchain node:</strong> Linux, 64 GB+ storage</li>
+            <li><strong>Logos Delivery:</strong> Linea Sepolia RPC URL (free)</li>
+            <li><strong>Basecamp:</strong> Qt6 (bundled in binary)</li>
+          </ul>
         </div>
       </section>
 
@@ -271,61 +334,57 @@
         <h2>Four ways to run a Logos node</h2>
         <p>Pick the method that matches your comfort level:</p>
 
-        <div class="platform-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="method-card">
-            <div class="title">1. Desktop App (Basecamp)</div>
-            <div class="desc">GUI application — download, open, done. Best for beginners. macOS &amp; Linux.</div>
-          </div>
-          <div class="method-card" style="border-left-color: #8be9fd;">
-            <div class="title">2. Docker Compose</div>
-            <div class="desc">One command to run a messaging node. Best for Linux/macOS. No Docker expertise needed — I'll walk through every command.</div>
-          </div>
-          <div class="method-card" style="border-left-color: #ffb86c;">
-            <div class="title">3. Prebuilt Binary</div>
-            <div class="desc">Download and run a compiled executable. Works for Logos Delivery (Linux/macOS) and Blockchain node (Linux).</div>
-          </div>
-          <div class="method-card" style="border-left-color: #f1fa8c;">
-            <div class="title">4. Build from Source</div>
-            <div class="desc">For developers who want to compile from the git repo. Requires Rust, CMake, etc.</div>
-          </div>
+        <div class="method-card">
+          <div class="title">1. Desktop App (Basecamp)</div>
+          <div class="desc">GUI application — download, open, done. Best for beginners. macOS &amp; Linux.</div>
         </div>
 
-        <p style="font-size: 0.45em; color: #6272a4; margin-top: 0.4em;">
-          We'll cover methods 1, 2, and 3 in detail.
+        <div class="method-card" style="border-left-color: #8be9fd;">
+          <div class="title">2. Docker Compose</div>
+          <div class="desc">One command to run a messaging node. Best for Linux/macOS. No Docker expertise needed — every command is explained.</div>
+        </div>
+
+        <div class="method-card" style="border-left-color: #ffb86c;">
+          <div class="title">3. Prebuilt Binary</div>
+          <div class="desc">Download and run a compiled executable. Works for Logos Delivery (Linux/macOS) and Blockchain node (Linux).</div>
+        </div>
+
+        <div class="method-card" style="border-left-color: #f1fa8c;">
+          <div class="title">4. Build from Source</div>
+          <div class="desc">For developers who want to compile from the git repo. Requires Rust, CMake, etc.</div>
+        </div>
+
+        <p style="font-size: 0.5em; color: #6272a4; margin-top: 0.4em;">
+          Methods 1, 2, and 3 are covered in detail.
         </p>
       </section>
 
-      <!-- SLIDE 6: What is Docker? (Beginner explainer) -->
+      <!-- SLIDE 6: What is Docker? -->
       <section>
         <h2>Wait — what is Docker?</h2>
         <p>A quick explainer before we use it:</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6em; margin-top: 0.3em;">
-          <div style="background: rgba(68,68,68,0.3); padding: 0.6em; border-radius: 6px;">
-            <p style="font-size: 0.48em;">
-              <strong style="color:#8be9fd;">Docker</strong> is a tool that packages software into
-              <strong>containers</strong> — like a lightweight virtual machine that has everything
-              the software needs to run.
-            </p>
-            <p style="font-size: 0.42em; margin-top: 0.4em;">
-              ✅ No need to install dependencies manually<br/>
-              ✅ Works the same on every OS<br/>
-              ✅ Easy to start / stop / remove
-            </p>
-          </div>
-          <div style="background: rgba(68,68,68,0.3); padding: 0.6em; border-radius: 6px;">
-            <p style="font-size: 0.48em;">
-              <strong style="color:#ffb86c;">Docker Compose</strong> is a helper that runs
-              multiple containers together with a single command.
-            </p>
-            <p style="font-size: 0.42em; margin-top: 0.4em;">
-              For Logos Delivery, it sets up:<br/>
-              ⚡ The node itself<br/>
-              📊 A Grafana dashboard<br/>
-              🗄️ A PostgreSQL database
-            </p>
+
+        <div class="method-card" style="border-left-color: #8be9fd;">
+          <div class="title">🐳 Docker</div>
+          <div class="desc">
+            Packages software into <strong>containers</strong> — like a lightweight virtual machine that has everything the software needs to run.
+            <ul style="margin-top: 0.3em; font-size: 0.9em;">
+              <li>✅ No need to install dependencies manually</li>
+              <li>✅ Works the same on every OS</li>
+              <li>✅ Easy to start / stop / remove</li>
+            </ul>
           </div>
         </div>
-        <blockquote style="font-size: 0.45em; margin-top: 0.2em;">
+
+        <div class="method-card" style="border-left-color: #ffb86c;">
+          <div class="title">📦 Docker Compose</div>
+          <div class="desc">
+            A helper that runs multiple containers together with a single command.
+            For Logos Delivery, it sets up: the node itself, a Grafana dashboard, and a PostgreSQL database.
+          </div>
+        </div>
+
+        <blockquote style="font-size: 0.5em; margin-top: 0.2em;">
           Think of Docker Compose like a "one-click launch" for a whole system.
         </blockquote>
       </section>
@@ -335,11 +394,7 @@
         <section>
           <h2>Method 1: Logos Basecamp</h2>
           <p class="fragment">The easiest way to run a Logos node — a desktop application with a graphical interface.</p>
-          <p class="fragment" style="font-size: 0.48em;">Available for <strong>macOS</strong> (DMG) and <strong>Linux</strong> (AppImage).</p>
-          <div style="text-align: center; margin-top: 0.8em;">
-            <p style="font-size: 1.2em;">👇</p>
-            <p style="font-size: 0.48em; color: #6272a4;">Click the down arrow or swipe down for detailed steps</p>
-          </div>
+          <p class="fragment" style="font-size: 0.55em;">Available for <strong>macOS</strong> (DMG) and <strong>Linux</strong> (AppImage).</p>
         </section>
 
         <section>
@@ -351,14 +406,14 @@
             </li>
             <li>
               <strong>Download the right file for your OS:</strong>
-              <ul style="font-size: 0.45em;">
+              <ul style="font-size: 0.52em;">
                 <li><strong>macOS:</strong> <code>logos-basecamp-*.dmg</code></li>
                 <li><strong>Linux:</strong> <code>logos-basecamp-*.AppImage</code></li>
               </ul>
             </li>
             <li>
               <strong>Run the downloaded file:</strong>
-              <ul style="font-size: 0.45em;">
+              <ul style="font-size: 0.52em;">
                 <li><strong>macOS:</strong> Open the <code>.dmg</code> and drag to Applications</li>
                 <li><strong>Linux:</strong> Make executable and run:</li>
               </ul>
@@ -375,34 +430,31 @@
         <section>
           <h2>Method 2: Logos Delivery via Docker Compose</h2>
           <p class="fragment">A messaging node (<strong>Waku</strong> protocol) using Docker Compose.</p>
-          <p class="fragment" style="font-size: 0.48em;">Works on <strong>Linux</strong>, <strong>macOS</strong>, and <strong>Windows</strong> (experimental).</p>
-          <p class="tip fragment" style="font-size: 0.45em;">If you don't have Docker yet, don't worry — I'll show you how to install it too.</p>
-          <div style="text-align: center; margin-top: 0.8em;">
-            <p style="font-size: 1.2em;">👇</p>
-          </div>
+          <p class="fragment" style="font-size: 0.55em;">Works on <strong>Linux</strong>, <strong>macOS</strong>, and <strong>Windows</strong> (experimental).</p>
+          <p class="tip fragment" style="font-size: 0.5em;">If you don't have Docker yet, the next slide shows how to install it.</p>
         </section>
 
         <section>
           <h3>Prerequisite: Install Docker</h3>
-          <p style="font-size: 0.48em;">If you don't have Docker, install it first:</p>
-          <div class="platform-grid" style="grid-template-columns: 1fr 1fr 1fr; font-size: 0.55em;">
-            <div class="platform-card available">
-              <strong>🐧 Linux</strong><br/>
-              <pre style="font-size:0.55em;"><code>curl -fsSL https://get.docker.com | sh
+          <p style="font-size: 0.55em;">If you don't have Docker, install it first:</p>
+
+          <div class="platform-card available" style="text-align: left;">
+            <strong>🐧 Linux</strong>
+            <pre style="font-size:0.7em;"><code>curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
 newgrp docker</code></pre>
-            </div>
-            <div class="platform-card available">
-              <strong>🍎 macOS</strong><br/>
-              <span style="font-size: 0.6em;">Download Docker Desktop from:</span><br/>
-              <code style="font-size:0.55em;">docker.com/products/docker-desktop</code>
-            </div>
-            <div class="platform-card experimental">
-              <strong>🪟 Windows</strong><br/>
-              <span style="font-size: 0.6em;">Install WSL2 + Docker Desktop</span><br/>
-              <code style="font-size:0.55em;">aka.ms/wsl2</code>
-            </div>
           </div>
+
+          <div class="platform-card available" style="text-align: left;">
+            <strong>🍎 macOS</strong>
+            <p style="font-size: 0.5em;">Download <strong>Docker Desktop</strong> from <code>docker.com/products/docker-desktop</code></p>
+          </div>
+
+          <div class="platform-card experimental" style="text-align: left;">
+            <strong>🪟 Windows</strong>
+            <p style="font-size: 0.5em;">Install <strong>WSL2</strong> then <strong>Docker Desktop</strong> from <code>aka.ms/wsl2</code></p>
+          </div>
+
           <p class="note" style="margin-top: 0.4em;">Verify with: <code>docker --version</code> and <code>docker compose version</code></p>
         </section>
 
@@ -423,24 +475,24 @@ cd nwaku-compose</code></pre>
               <pre><code># Open .env in any text editor
 # Find and set:
 RLN_RELAY_ETH_CLIENT_ADDRESS=https://linea-sepolia.infura.io/v3/YOUR_KEY</code></pre>
-              <p style="font-size: 0.4em;">Get a free Infura key at <code>infura.io</code> (Linea Sepolia)</p>
+              <p style="font-size: 0.45em;">Get a free Infura key at <code>infura.io</code> (Linea Sepolia)</p>
             </li>
             <li>
               <strong>Start the node:</strong>
               <pre><code>docker compose up -d</code></pre>
-              <p style="font-size: 0.4em;">The <code>-d</code> flag runs it in the background.</p>
+              <p style="font-size: 0.45em;">The <code>-d</code> flag runs it in the background.</p>
             </li>
             <li>
               <strong>Check the logs:</strong>
               <pre><code>docker compose logs -f nwaku</code></pre>
-              <p style="font-size: 0.4em;">Press <code>Ctrl+C</code> to stop viewing logs (node keeps running).</p>
+              <p style="font-size: 0.45em;">Press <code>Ctrl+C</code> to stop viewing logs (node keeps running).</p>
             </li>
           </ol>
         </section>
 
         <section>
           <h3>Logos Delivery — Verify &amp; Dashboard</h3>
-          <p style="font-size: 0.48em;">Check that everything is running:</p>
+          <p style="font-size: 0.55em;">Check that everything is running:</p>
 
           <div class="method-card" style="border-left-color: #50fa7b;">
             <div class="title">📊 Open the Grafana dashboard</div>
@@ -471,10 +523,7 @@ RLN_RELAY_ETH_CLIENT_ADDRESS=https://linea-sepolia.infura.io/v3/YOUR_KEY</code><
         <section>
           <h2>Method 3: Logos Delivery via Prebuilt Binary</h2>
           <p class="fragment">No Docker required — download and run directly on your system.</p>
-          <p class="fragment" style="font-size: 0.48em;">Works on <strong>Linux</strong> (x86_64) and <strong>macOS</strong> (ARM64/Intel).<br/>Windows support is experimental.</p>
-          <div style="text-align: center; margin-top: 0.8em;">
-            <p style="font-size: 1.2em;">👇</p>
-          </div>
+          <p class="fragment" style="font-size: 0.55em;">Works on <strong>Linux</strong> (x86_64) and <strong>macOS</strong> (ARM64/Intel).<br/>Windows support is experimental.</p>
         </section>
 
         <section>
@@ -483,7 +532,7 @@ RLN_RELAY_ETH_CLIENT_ADDRESS=https://linea-sepolia.infura.io/v3/YOUR_KEY</code><
             <li>
               <strong>Go to the releases page:</strong>
               <pre><code>https://github.com/waku-org/nwaku/releases</code></pre>
-              <p style="font-size: 0.4em;">Pick the latest stable version (e.g. v0.38.1).</p>
+              <p style="font-size: 0.45em;">Pick the latest stable version (e.g. v0.38.1).</p>
             </li>
             <li>
               <strong>Download the archive for your platform:</strong>
@@ -516,10 +565,7 @@ cd build/</code></pre>
         <section>
           <h2>Method 4: Blockchain Node (Binary)</h2>
           <p class="fragment">Run a full consensus node on the Logos testnet.</p>
-          <p class="warn fragment" style="font-size: 0.48em;">⚠️ <strong>Linux only</strong> (x86_64 or Raspberry Pi 5).<br/>Requires <strong>64 GB+ storage</strong> and <strong>glibc 2.39+</strong>.</p>
-          <div style="text-align: center; margin-top: 0.8em;">
-            <p style="font-size: 1.2em;">👇</p>
-          </div>
+          <p class="warn fragment" style="font-size: 0.55em;">⚠️ <strong>Linux only</strong> (x86_64 or Raspberry Pi 5).<br/>Requires <strong>64 GB+ storage</strong> and <strong>glibc 2.39+</strong>.</p>
         </section>
 
         <section>
@@ -560,7 +606,7 @@ tar -xf logos-blockchain-node-linux-x86_64-0.1.2.tar.gz</code></pre>
   -p /ip4/65.109.51.37/udp/3001/quic-v1 \
   -p /ip4/65.109.51.37/udp/3002/quic-v1 \
   -p /ip4/65.109.51.37/udp/3003/quic-v1</code></pre>
-              <p style="font-size:0.4em;">Add <code>--no-public-ip-check</code> if behind NAT/CGNAT.</p>
+              <p style="font-size:0.45em;">Add <code>--no-public-ip-check</code> if behind NAT/CGNAT.</p>
             </li>
             <li>
               <strong>Start the node:</strong>
@@ -570,14 +616,14 @@ tar -xf logos-blockchain-node-linux-x86_64-0.1.2.tar.gz</code></pre>
               <strong>Check status:</strong>
               <pre><code>curl -s http://localhost:8080/cryptarchia/info | jq .
 curl -s http://localhost:8080/network/info | jq .</code></pre>
-              <p style="font-size: 0.4em;">Look for mode "Bootstrapping" → "Online".<br/>Bootstrap takes 12–24 hours.</p>
+              <p style="font-size: 0.45em;">Look for mode "Bootstrapping" → "Online".<br/>Bootstrap takes 12–24 hours.</p>
             </li>
           </ol>
         </section>
 
         <section>
           <h3>Get Testnet Tokens</h3>
-          <p style="font-size: 0.48em;">To stake on the blockchain node, you need testnet tokens:</p>
+          <p style="font-size: 0.55em;">To stake on the blockchain node, you need testnet tokens:</p>
           <ol class="step-list">
             <li>
               <strong>Find your wallet keys:</strong>
@@ -586,7 +632,7 @@ curl -s http://localhost:8080/network/info | jq .</code></pre>
             <li>
               <strong>Visit the faucet:</strong>
               <pre><code>https://testnet.blockchain.logos.co/web/faucet/</code></pre>
-              <p style="font-size: 0.4em;">Enter one of the hex values from <code>known_keys</code>.</p>
+              <p style="font-size: 0.45em;">Enter one of the hex values from <code>known_keys</code>.</p>
             </li>
             <li>
               <strong>Wait ~3.5 hours</strong> for tokens to be eligible for staking.
@@ -617,10 +663,10 @@ curl -s http://localhost:8080/network/info | jq .</code></pre>
           <div class="desc">Run <code>docker compose logs</code> to see errors. Common fix: ensure ports aren't already in use (<code>lsof -i :8645</code>).</div>
         </div>
 
-        <div class="method-card" style="border-left-color: #bd93f9;">
+        <div class="method-card" style="border-left-color: var(--logos-orange);">
           <div class="title">📚 Need help?</div>
           <div class="desc">
-            <ul style="font-size: 0.7em;">
+            <ul style="font-size: 0.8em;">
               <li>Official docs: <code>docs.logos.co</code></li>
               <li>Builder Hub: <code>build.logos.co</code></li>
               <li>Discord: <code>discord.com/invite/logosnetwork</code></li>
@@ -633,7 +679,7 @@ curl -s http://localhost:8080/network/info | jq .</code></pre>
       <!-- SLIDE 12: Summary -->
       <section>
         <h2>Summary</h2>
-        <p style="font-size: 0.48em;">You have 3 solid options to run a Logos node:</p>
+        <p style="font-size: 0.55em;">You have 3 solid options to run a Logos node:</p>
 
         <table>
           <thead>
@@ -653,7 +699,7 @@ curl -s http://localhost:8080/network/info | jq .</code></pre>
           Use the <strong>blockchain node</strong> if you're on Linux and want to participate in consensus.
         </blockquote>
 
-        <p style="text-align: center; margin-top: 0.8em; font-size: 0.55em; color: #50fa7b;">
+        <p style="text-align: center; margin-top: 0.8em; font-size: 0.6em; color: #50fa7b;">
           🎉 You're now ready to run a Logos node!
         </p>
       </section>
